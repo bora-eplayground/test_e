@@ -5,6 +5,9 @@ let page = 1;
 // --------------------
 let diceSheet;
 let diceFrames = [];
+const DICE_COLS = 5;
+const DICE_ROWS = 2;
+const HOME_DICE_FRAME = 9;
 let valueFrameMap = [0, 0, 5, 2, 7, 9, 4]; 
 // index 1~6 사용
 // 실제 결과 숫자는 텍스트로도 함께 표시해서 헷갈리지 않게 처리
