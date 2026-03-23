@@ -411,13 +411,15 @@ function drawImageDice(d) {
 
   noStroke();
   fill(0, 22);
-  ellipse(14, d.size * 0.38, d.size * 0.85, 32);
+  ellipse(0, d.size * 0.38, d.size * 0.82, 28);
+
+  imageMode(CENTER);
 
   let f = diceFrames[d.frameIndex];
   image(
     diceSheet,
-    -d.size / 2,
-    -d.size / 2,
+    0,
+    0,
     d.size,
     d.size,
     f.sx,
@@ -428,7 +430,6 @@ function drawImageDice(d) {
 
   pop();
 
-  // 결과 숫자 배지
   noStroke();
   fill(255);
   rect(d.x, d.y + d.size / 2 + 34, 72, 42, 20);
