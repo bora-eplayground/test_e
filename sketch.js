@@ -311,18 +311,20 @@ function drawCenteredIcons(iconList, centerX, centerY, iconSize, gap) {
 
 function drawHomeDiceIcon(x, y, size) {
   push();
-  translate(x, y);
+  translate(x, y - 8);
   rotate(-0.08);
 
   noStroke();
   fill(0, 18);
-  ellipse(8, 42, size * 1.1, 26);
+  ellipse(8, 38, size * 0.9, 20);
 
-  let f = diceFrames[0];
+  imageMode(CENTER);
+
+  let f = diceFrames[HOME_DICE_FRAME];
   image(
     diceSheet,
-    -size / 2,
-    -size / 2,
+    0,
+    0,
     size,
     size,
     f.sx,
@@ -330,8 +332,11 @@ function drawHomeDiceIcon(x, y, size) {
     f.sw,
     f.sh
   );
+
   pop();
 }
+
+
 
 function drawHomeJobCardIcon(x, y, size) {
   push();
