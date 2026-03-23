@@ -733,6 +733,47 @@ function drawDescriptionPanel() {
   pop();
 }
 
+function drawWrappedTextBlock(str, x, y, maxWidth, lineHeight, maxLines) {
+  let lines = [];
+  let current = "";
+  let chars = Array.from(str);
+
+  for (let i = 0; i < chars.length; i++) {
+    let ch = chars[i];
+
+    if (ch === "\n") {
+      lines.push(current);
+      current = "";
+      continue;
+    }
+
+    let testLine = current + ch;
+
+    if (textWidth(testLine) > maxWidth && current !== "") {
+      lines.push(current);
+      current = ch;
+
+      if (maxLines && lines.length >= maxLines) {
+        break;
+      }
+    } else {
+      current = testLine;
+    }
+  }
+
+  if ((!maxLines || lines.length < maxLines) && current !== "") {
+    lines.push(current);
+  }
+
+  if (maxLines && lines.length > maxLines) {
+    lines = lines.slice(0, maxLines);
+  }
+
+  for (let i = 0; i < lines.length; i++) {
+    text(lines[i], x, y + i * lineHeight);
+  }
+}
+
 function handleJobPageClick() {
   if (isInsideRect(mouseX, mouseY, 100, 42, 120, 42)) {
     page = 1;
