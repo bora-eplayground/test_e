@@ -404,14 +404,26 @@ function drawDicePage() {
 }
 
 function drawImageDice(d) {
+  let boxSize = d.size;
+  let boxLeft = d.x - boxSize / 2;
+  let boxTop = d.y - boxSize / 2 - d.bounceY;
+
   push();
+
+  // 주사위가 보일 흰색 박스
+  noStroke();
+  fill(255);
+  rect(d.x, d.y - d.bounceY, boxSize, boxSize, 0);
+
+  // 박스 안에서만 이미지가 보이도록 자르기
+  drawingContext.save();
+  drawingContext.beginPath();
+  drawingContext.rect(boxLeft, boxTop, boxSize, boxSize);
+  drawingContext.clip();
+
   translate(d.x, d.y - d.bounceY);
   rotate(d.rot);
   scale(d.scaleNow);
-
-  noStroke();
-  fill(0, 22);
-  ellipse(0, d.size * 0.38, d.size * 0.82, 28);
 
   imageMode(CENTER);
 
@@ -419,7 +431,7 @@ function drawImageDice(d) {
   image(
     diceSheet,
     0,
-    0,
+    6,     // 살짝 아래로 내려서 위 빨간 줄 제거
     d.size,
     d.size,
     f.sx,
@@ -428,8 +440,10 @@ function drawImageDice(d) {
     f.sh
   );
 
+  drawingContext.restore();
   pop();
 
+  // 숫자 표시
   noStroke();
   fill(255);
   rect(d.x, d.y + d.size / 2 + 34, 72, 42, 20);
