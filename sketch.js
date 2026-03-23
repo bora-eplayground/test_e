@@ -669,18 +669,27 @@ function drawDescriptionPanel() {
   let panelW = 560;
   let panelH = 290;
 
+  let left = panelX - panelW / 2;
+  let top = panelY - panelH / 2;
+  let pad = 26;
+  let innerW = panelW - pad * 2;
+
+  // 그림자
   noStroke();
   fill(0, 16);
   rect(panelX + 8, panelY + 8, panelW, panelH, 18);
 
+  // 본체 패널
   stroke(182);
   strokeWeight(2);
   fill(255);
   rect(panelX, panelY, panelW, panelH, 18);
 
+  // 카드가 선택되지 않았을 때
   if (!selectedCard) {
     noStroke();
     fill(120);
+    textAlign(CENTER, CENTER);
     textSize(22);
     text("카드를 선택하세요", panelX, panelY - 24);
 
@@ -692,52 +701,71 @@ function drawDescriptionPanel() {
 
   push();
   textAlign(LEFT, TOP);
+  textWrap(WORD);
 
+  // 패널 안쪽에서만 글씨가 보이도록 클리핑
+  drawingContext.save();
+  drawingContext.beginPath();
+  drawingContext.rect(left + 18, top + 18, panelW - 36, panelH - 36);
+  drawingContext.clip();
+
+  // 제목
   noStroke();
   fill(35);
   textSize(28);
   text(
     selectedCard.emoji + " " + selectedCard.title,
-    panelX - panelW / 2 + 26,
-    panelY - panelH / 2 + 24
+    left + pad,
+    top + 24,
+    innerW,
+    36
   );
 
+  // 한 줄 소개 라벨
   fill(90);
   textSize(16);
   text(
     "한 줄 소개",
-    panelX - panelW / 2 + 26,
-    panelY - panelH / 2 + 78
+    left + pad,
+    top + 78,
+    innerW,
+    22
   );
 
+  // 한 줄 소개 내용
   fill(42);
   textSize(17);
   text(
     selectedCard.summary,
-    panelX - panelW / 2 + 26,
-    panelY - panelH / 2 + 104,
-    panelW - 52,
+    left + pad,
+    top + 104,
+    innerW,
     42
   );
 
+  // 직업 설명 라벨
   fill(90);
   textSize(16);
   text(
     "직업 설명",
-    panelX - panelW / 2 + 26,
-    panelY - panelH / 2 + 152
+    left + pad,
+    top + 152,
+    innerW,
+    22
   );
 
+  // 직업 설명 내용
   fill(45);
   textSize(16);
   text(
     selectedCard.description,
-    panelX - panelW / 2 + 26,
-    panelY - panelH / 2 + 178,
-    panelW - 52,
-    100
+    left + pad,
+    top + 178,
+    innerW,
+    84
   );
 
+  drawingContext.restore();
   pop();
 }
 
