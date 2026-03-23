@@ -738,28 +738,27 @@ function drawFrontCard(card, x, y, isSelected) {
 }
 
 function drawDescriptionPanel() {
-  let panelX = 835;
-  let panelY = 270;
-  let panelW = 610;
-  let panelH = 320;
+  let layout = getJobLayout();
+
+  let panelX = layout.panelX;
+  let panelY = layout.panelY;
+  let panelW = layout.panelW;
+  let panelH = layout.panelH;
 
   let left = panelX - panelW / 2;
   let top = panelY - panelH / 2;
   let pad = 28;
   let innerW = panelW - pad * 2;
 
-  // 그림자
   noStroke();
   fill(0, 16);
   rect(panelX + 8, panelY + 8, panelW, panelH, 18);
 
-  // 본체
   stroke(182);
   strokeWeight(2);
   fill(255);
   rect(panelX, panelY, panelW, panelH, 18);
 
-  // 카드가 선택되지 않았을 때
   if (!selectedCard) {
     push();
     textAlign(CENTER, CENTER);
@@ -778,34 +777,32 @@ function drawDescriptionPanel() {
   push();
   textAlign(LEFT, TOP);
 
-  // 제목
   noStroke();
   fill(35);
   textSize(28);
   text(selectedCard.emoji + " " + selectedCard.title, left + pad, top + 22);
 
-  // 한 줄 소개 제목
   fill(90);
   textSize(15);
   text("한 줄 소개", left + pad, top + 78);
 
-  // 한 줄 소개 내용
   fill(45);
   textSize(17);
   drawWrappedTextBlock(selectedCard.summary, left + pad, top + 104, innerW, 26, 2);
 
-  // 직업 설명 제목
   fill(90);
   textSize(15);
   text("직업 설명", left + pad, top + 162);
 
-  // 직업 설명 내용
   fill(45);
   textSize(16);
   drawWrappedTextBlock(selectedCard.description, left + pad, top + 188, innerW, 24, 4);
 
   pop();
 }
+
+
+
 
 function drawWrappedTextBlock(str, x, y, maxWidth, lineHeight, maxLines) {
   let lines = [];
