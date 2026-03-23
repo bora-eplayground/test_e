@@ -66,8 +66,8 @@ function setup() {
     }
   ];
 
-  diceA = createDice(width / 2 - 170, height / 2 + 10, 240);
-  diceB = createDice(width / 2 + 170, height / 2 + 10, 240);
+  diceA = createDice(width / 2 - 170, height / 2 + 10, 260);
+  diceB = createDice(width / 2 + 170, height / 2 + 10, 260);
 
   jobDeck = [
     {
