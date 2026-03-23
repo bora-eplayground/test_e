@@ -883,13 +883,14 @@ function startFlyingJobCard() {
   if (flyingCard) return;
   if (myCards.length >= MAX_HAND) return;
 
+  let layout = getJobLayout();
   let slot = getHandPositions()[myCards.length];
   let picked = getRandomJobCard();
 
   flyingCard = {
     card: picked,
-    startX: 190,
-    startY: 270,
+    startX: layout.deckX,
+    startY: layout.deckY,
     endX: slot.x,
     endY: slot.y,
     p: 0,
