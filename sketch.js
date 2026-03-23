@@ -297,15 +297,15 @@ function drawCenteredIcons(iconList, centerX, centerY, iconSize, gap) {
     rect(x, y + (hover ? -4 : 0), iconSize, iconSize + 18, 26);
 
     if (iconList[i].type === "dice") {
-      drawHomeDiceIcon(x, y - 10 + (hover ? -4 : 0), 76);
-    } else if (iconList[i].type === "job") {
-      drawHomeJobCardIcon(x, y - 10 + (hover ? -4 : 0), 74);
-    }
+  drawHomeDiceIcon(x, y - 18 + (hover ? -4 : 0), 82);
+} else if (iconList[i].type === "job") {
+  drawHomeJobCardIcon(x, y - 18 + (hover ? -4 : 0), 70);
+}
 
-    noStroke();
-    fill(40);
-    textSize(18);
-    text(iconList[i].label, x, y + 52 + (hover ? -4 : 0));
+noStroke();
+fill(40);
+textSize(18);
+text(iconList[i].label, x, y + 42 + (hover ? -4 : 0));
   }
 }
 
