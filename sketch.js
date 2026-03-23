@@ -1026,3 +1026,34 @@ function isInsideRect(px, py, cx, cy, w, h) {
 function easeOutCubic(t) {
   return 1 - pow(1 - t, 3);
 }
+
+
+// ======================================================
+// 새로 만듦(직업카드 페이지) 가운데
+// ======================================================
+
+
+function getJobLayout() {
+  let groupW = min(980, width - 80);
+  let left = width / 2 - groupW / 2;
+
+  let deckX = left + 90;
+  let deckY = height * 0.33;
+
+  let panelW = min(610, groupW - 220);
+  let panelH = 320;
+  let panelX = left + 220 + panelW / 2;
+  let panelY = height * 0.33;
+
+  return {
+    deckX,
+    deckY,
+    panelX,
+    panelY,
+    panelW,
+    panelH
+  };
+}
+
+
+
