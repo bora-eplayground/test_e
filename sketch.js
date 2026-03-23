@@ -403,25 +403,45 @@ function drawDicePage() {
   text("이미지 주사위 + 굴러가는 애니메이션이 적용된 버전입니다", width / 2, height - 45);
 }
 
+//주사이 이미지 수정
+
 function drawImageDice(d) {
   let boxSize = d.size;
-  let boxLeft = d.x - boxSize / 2;
-  let boxTop = d.y - boxSize / 2 - d.bounceY;
+  let boxX = d.x;
+  let boxY = d.y - d.bounceY;
+
+  let boxLeft = boxX - boxSize / 2;
+  let boxTop = boxY - boxSize / 2;
+
+  // 클리핑 여백
+  let clipLeftPad = 4;
+  let clipRightPad = 4;
+  let clipTopPad = 10;
+  let clipBottomPad = 4;
+
+  // 이미지 표시 크기와 위치
+  let imgSize = d.size * 0.92;
+  let imgYOffset = 12;
 
   push();
 
-  // 주사위가 보일 흰색 박스
+  // 흰 박스
   noStroke();
   fill(255);
-  rect(d.x, d.y - d.bounceY, boxSize, boxSize, 0);
+  rect(boxX, boxY, boxSize, boxSize, 0);
 
-  // 박스 안에서만 이미지가 보이도록 자르기
+  // 박스 안쪽만 보이도록 자르기
   drawingContext.save();
   drawingContext.beginPath();
-  drawingContext.rect(boxLeft, boxTop, boxSize, boxSize);
+  drawingContext.rect(
+    boxLeft + clipLeftPad,
+    boxTop + clipTopPad,
+    boxSize - clipLeftPad - clipRightPad,
+    boxSize - clipTopPad - clipBottomPad
+  );
   drawingContext.clip();
 
-  translate(d.x, d.y - d.bounceY);
+  translate(boxX, boxY);
   rotate(d.rot);
   scale(d.scaleNow);
 
@@ -431,9 +451,9 @@ function drawImageDice(d) {
   image(
     diceSheet,
     0,
-    6,     // 살짝 아래로 내려서 위 빨간 줄 제거
-    d.size,
-    d.size,
+    imgYOffset,
+    imgSize,
+    imgSize,
     f.sx,
     f.sy,
     f.sw,
@@ -441,6 +461,12 @@ function drawImageDice(d) {
   );
 
   drawingContext.restore();
+
+  // 위쪽 혹시 남는 부분 한 번 더 흰색으로 덮기
+  noStroke();
+  fill(255);
+  rect(boxX, boxTop + 5, boxSize, 12, 0);
+
   pop();
 
   // 숫자 표시
