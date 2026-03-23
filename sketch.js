@@ -615,20 +615,20 @@ function drawJobCardPage() {
 }
 
 function drawDeckArea() {
-  let deckX = 190;
-  let deckY = 270;
+  let layout = getJobLayout();
+  let deckX = layout.deckX;
+  let deckY = layout.deckY;
+
   let hover = isInsideRect(mouseX, mouseY, deckX, deckY, CARD_W + 30, CARD_H + 30);
 
   fill(45);
   textSize(22);
-  text("카드 더미", deckX, 118);
+  text("카드 더미", deckX, deckY - 150);
 
-  // 더미 그림자
   noStroke();
   fill(0, 16);
   rect(deckX + 10, deckY + 12, CARD_W + 16, CARD_H + 16, 16);
 
-  // 카드 더미 (교육용 카드 뒷면)
   drawCardBack(deckX + 12, deckY - 10, CARD_W, CARD_H, 0.10);
   drawCardBack(deckX + 6, deckY - 5, CARD_W, CARD_H, 0.05);
   drawCardBack(deckX, deckY + (hover ? -6 : 0), CARD_W, CARD_H, 0);
@@ -636,16 +636,16 @@ function drawDeckArea() {
   fill(90);
   textSize(15);
   if (flyingCard) {
-    text("카드가 날아오는 중", deckX, 388);
+    text("카드가 날아오는 중", deckX, deckY + 118);
   } else if (myCards.length < MAX_HAND) {
-    text("클릭해서 1장 뽑기", deckX, 388);
+    text("클릭해서 1장 뽑기", deckX, deckY + 118);
   } else {
-    text("최대 5장까지 보관 가능", deckX, 388);
+    text("최대 5장까지 보관 가능", deckX, deckY + 118);
   }
 
   fill(70);
   textSize(15);
-  text("내 카드: " + myCards.length + " / " + MAX_HAND, deckX, 416);
+  text("내 카드: " + myCards.length + " / " + MAX_HAND, deckX, deckY + 146);
 }
 
 function drawCardBack(x, y, w, h, angleValue) {
