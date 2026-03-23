@@ -226,23 +226,25 @@ function drawBackground() {
 // 주사위 프레임 만들기
 // 업로드한 JPG는 5열 x 2행 배치 구조로 사용
 // ======================================================
-function buildDiceFrames() {
-  let cols = 5;
-  let rows = 2;
-  let frameW = 384;
-  let frameH = 384;
 
-  for (let r = 0; r < rows; r++) {
-    for (let c = 0; c < cols; c++) {
+function buildDiceFrames() {
+  diceFrames = [];
+
+  let cellW = diceSheet.width / DICE_COLS;
+  let cellH = diceSheet.height / DICE_ROWS;
+
+  for (let r = 0; r < DICE_ROWS; r++) {
+    for (let c = 0; c < DICE_COLS; c++) {
       diceFrames.push({
-        sx: c * frameW,
-        sy: r * frameH,
-        sw: frameW,
-        sh: frameH
+        sx: c * cellW,
+        sy: r * cellH,
+        sw: cellW,
+        sh: cellH
       });
     }
   }
 }
+
 
 function createDice(x, y, size) {
   return {
