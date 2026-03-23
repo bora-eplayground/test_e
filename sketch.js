@@ -51,7 +51,9 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(1200, 820);
+  cnv = createCanvas(windowWidth, windowHeight);
+cnv.position(0, 0);
+cnv.style("display", "block");
   textAlign(CENTER, CENTER);
   rectMode(CENTER);
   imageMode(CORNER);
