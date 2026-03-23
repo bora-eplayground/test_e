@@ -192,6 +192,15 @@ cnv.style("display", "block");
   diceB.value = floor(random(1, 7));
   diceA.frameIndex = valueFrameMap[diceA.value];
   diceB.frameIndex = valueFrameMap[diceB.value];
+
+
+//가운데정렬보라가
+  
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+}
+
+  
 }
 
 function draw() {
