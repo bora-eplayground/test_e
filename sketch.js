@@ -398,7 +398,18 @@ function checkHomeIconClick() {
 // ======================================================
 // 2. 주사위 페이지
 // ======================================================
+
 function drawDicePage() {
+  let layout = getDiceLayout();
+
+  diceA.x = layout.x1;
+  diceA.y = layout.y;
+  diceA.size = layout.diceSize;
+
+  diceB.x = layout.x2;
+  diceB.y = layout.y;
+  diceB.size = layout.diceSize;
+
   fill(35);
   textSize(32);
   text("주사위", width / 2, 60);
@@ -416,12 +427,13 @@ function drawDicePage() {
   drawImageDice(diceA);
   drawImageDice(diceB);
 
-  drawDiceResultPanel(width / 2, height - 120);
+  drawDiceResultPanel(width / 2, layout.resultY);
 
   fill(80);
   textSize(17);
-  text("이미지 주사위 + 굴러가는 애니메이션이 적용된 버전입니다", width / 2, height - 45);
+  text("이미지 주사위 + 굴러가는 애니메이션이 적용된 버전입니다", width / 2, layout.resultY + 70);
 }
+
 
 //주사이 이미지 수정
 
