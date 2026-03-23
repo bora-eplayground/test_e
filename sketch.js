@@ -578,15 +578,17 @@ function handleDicePageClick() {
     return;
   }
 
-  let hitSize = 260;
+  let layout = getDiceLayout();
+  let hitSize = layout.diceSize + 30;
 
   if (
-    isInsideRect(mouseX, mouseY, diceA.x, diceA.y, hitSize, hitSize) ||
-    isInsideRect(mouseX, mouseY, diceB.x, diceB.y, hitSize, hitSize)
+    isInsideRect(mouseX, mouseY, layout.x1, layout.y, hitSize, hitSize) ||
+    isInsideRect(mouseX, mouseY, layout.x2, layout.y, hitSize, hitSize)
   ) {
     startDiceRoll();
   }
 }
+
 
 // ======================================================
 // 3. 직업 카드 페이지
