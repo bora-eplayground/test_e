@@ -859,13 +859,13 @@ function handleJobPageClick() {
     return;
   }
 
-  // 카드 더미 클릭
-  if (isInsideRect(mouseX, mouseY, 190, 270, CARD_W + 30, CARD_H + 30)) {
+  let layout = getJobLayout();
+
+  if (isInsideRect(mouseX, mouseY, layout.deckX, layout.deckY, CARD_W + 30, CARD_H + 30)) {
     startFlyingJobCard();
     return;
   }
 
-  // 내 카드 클릭
   let positions = getHandPositions();
   for (let i = 0; i < myCards.length; i++) {
     if (isInsideRect(mouseX, mouseY, positions[i].x, positions[i].y, CARD_W, CARD_H)) {
